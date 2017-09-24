@@ -1,0 +1,118 @@
+html { 
+  background: url('../images/star-wars-wallpaper.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  /*background-blend-mode: overlay;*/
+}
+
+/*div {
+  border : 1px solid black;
+}*/
+
+body {
+  background-color: transparent;
+}
+
+.container {
+  margin-left : 5px;
+}
+
+h1, h3, p {
+  font-family : 'Michroma', sans-serif;
+  white-space : nowrap; 
+  font-weight : bold;
+}
+
+h1 {
+  font-size : 40px;
+  color : #dfe9f5;
+  font-weight: bold;
+  text-align : center;
+  margin-top : 20px;
+}
+
+h3 {
+ font-size : 16px;
+}
+
+p {
+  text-align: center;
+  font-size : 10px;
+}
+#your_character, #enemies {
+  width : 605px;
+  height : 140px;
+  border : 1px solid black;
+}
+
+#defender {
+  width : 150px;
+  height : 120px;
+  border : 1px solid black;
+}
+
+#fight, #message {
+  height : 75px;
+  width : 300px;
+  border : 1px solid black;
+}
+
+#your_character_text, #enemies_text, #defender_text{
+  height : 20px;
+  width : 100px;
+  text-align : left;
+  clear : both;
+}
+
+.char_container{
+  height : 120px;
+  width : 150px;
+  float : left;
+  margin : 0px;
+  border : 2px solid blue;
+  background-color: #ffffff
+}
+
+#defender {
+  height : 140px;
+}
+
+#enemies_container, #defender_container {
+  height : 120px;
+  width : 150px;
+  margin : 0px;
+  border : 1px solid black;
+  display : block;
+}
+
+/*.enemies_text_top, .enemies_text_bottom {
+  display : block;
+  height : 20px;
+  width : 100%;
+}*/
+
+.char_name, .char_img, .char_hp {
+  width : 100%; 
+}
+
+.char_name, .char_hp {
+  height : 20px;
+  padding-top : 5px;
+  padding-bottom : 5px;
+}
+
+.char_img {
+  height : 80px;
+  margin : 0px 20px;
+  width : 110px;
+}
+
+img {
+  width : 100%;
+  height : 100%;
+}
+.char_hp {
+  height : 20px;
+}

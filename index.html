@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Star Wars RPG</title>
+  <script
+  src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Cantarell:700i|Michroma|Mouse+Memoirs|Orbitron:500" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>Star Wars RPG!</h1>
+  </header>>
+  <div class="container">
+    <div id="your_character">
+      <!-- <div id="your_character_text_top"></div> -->
+      <div class="char_container luke_container">
+        <div class="char_name luke_name">
+          <p>Luke Skywalker</p>
+        </div>
+          <div class="char_img luke_img">
+            <img src="https://i.pinimg.com/736x/9d/62/f3/9d62f388f10fd0480e6e4ba0c6667729--star-wars-ewok-star-wars-luke-skywalker.jpg" alt="Luke Skywalker">
+          </div>
+        <div class="char_hp luke_hp"></div>
+      </div>
+
+      <div class="char_container anakin_container">
+        <div class="char_name anakin_name">
+          <p>Anakin Skywalker</p>
+        </div>
+          <div class="char_img anakin_img">
+            <img src="https://conversamos.files.wordpress.com/2013/08/anakin_skywalker_by_muharremacar.jpg?w=434&h=598" alt="Anakin Skywalker">
+          </div>
+        <div class="char_hp anakin_hp"></div>
+      </div>
+    
+      <div class="char_container kylo_container">
+        <div class="char_name kylo_name">
+          <p>Kylo Ren</p>
+        </div>
+          <div class="char_img kylo_img">
+            <img src="https://static.comicvine.com/uploads/original/11124/111240586/4966620-kylo+ren+afbeelding.jpg" alt="Kylo Ren">
+          </div>
+        <div class="char_hp kylo_hp"></div>
+      </div>
+   
+      <div class="char_container qui_gon_container">
+        <div class="char_name qui_gon_name">
+          <p>Qui-Gon Jinn</p>
+        </div>
+          <div class="char_img qui_gon_img">
+            <img src="http://ll-c.ooyala.com/e1/VyOHRtYjE6b5z_pTZtahaik0tEximAlQ/promo322198142" alt="Qui-Gon Jinn">
+          </div>
+        <div class="char_hp qui_gon_hp"></div>
+      </div>
+      <div id="your_character_text">
+        <h3>Your Character</h3>
+      </div>
+    </div>
+    <div id="enemies">
+      <div id="enemies_container"></div>
+      <div id="enemies_text">
+        <h3>Enemies Available To Attack</h3>
+      </div>
+    </div>
+
+    <div id="fight">
+      <h3>Fight Section</h3>
+      <br>
+      <button type="button" class="btn btn-danger">Attack!</button>
+    </div>
+    <div id="defender">
+      <div id="defender_text">
+        <h3>Defender</h3>
+      </div>
+      <div id="defender_container">
+        
+      </div>
+    </div>
+    <div id="message"></div>
+  </div>
+
+ <script type="text/javascript" src="assets/javascript/game.js"></script> 
+
+</body>
+</html>
