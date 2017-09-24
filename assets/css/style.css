@@ -23,6 +23,7 @@ h1, h3, p {
   font-family : 'Michroma', sans-serif;
   white-space : nowrap; 
   font-weight : bold;
+  
 }
 
 h1 {
@@ -44,19 +45,19 @@ p {
 #your_character, #enemies {
   width : 605px;
   height : 140px;
-  border : 1px solid black;
+  /*border : 1px solid black;*/
 }
 
 #defender {
   width : 150px;
   height : 120px;
-  border : 1px solid black;
+  /*border : 1px solid black;*/
 }
 
 #fight, #message {
   height : 75px;
   width : 300px;
-  border : 1px solid black;
+  /*border : 1px solid black;*/
 }
 
 #your_character_text, #enemies_text, #defender_text{
@@ -83,7 +84,7 @@ p {
   height : 120px;
   width : 150px;
   margin : 0px;
-  border : 1px solid black;
+  /*border : 1px solid black;*/
   display : block;
 }
 

@@ -69,12 +69,16 @@ var starWars = {
   isCharacterChosen : false ,
   isEnemyChosen : false,
   characters : ["Luke Skywalker", "Anakin Skywalker", "Kylo Ren", "Qui-Gon Jinn"],
-  availableEnemies : this.characters.length - 1
+  availableEnemies : 3 //this.characters.length - 1
 }
 
 $(document).ready(function() {
-  //display the HP for each player
-  $(".luke_hp").html("<p>" + starWars.lukeCurrentHP + "</p>");
+
+  //display the HP for each player as soon as the html document loads
+  $("#luke_hp").html(starWars.lukeCurrentHP);
+  $("#anakin_hp").html(starWars.anakinCurrentHP);
+  $("#kylo_hp").html(starWars.kyloCurrentHP);
+  $("#qui_gon_hp").html(starWars.quiCurrentHP);
 
 });
 
