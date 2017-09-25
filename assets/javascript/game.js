@@ -15,12 +15,12 @@
   //If there is no character in the Enemies Available to Attack section (availableEnemies = 0)
     //The character's thumbnail stays on the first section, but it moves under the heading Your Character
     //the other characters move to the 2nd section, underneath the heading Enemies Available to Attack
-    //Update the variable availableEnemies to the appropriate number
+    //Update the variable availableEnemies to the appropriate list of characters that are now your enemise
     //thumbnails in the Enemies Available to Attack row have a background color of red
-  // If there is one or more character(s) in the Enemies Available to Attack section (availableEnemies > 0) AND there are is no character in the defender section (isEnemyChosen = false)
+  // Else if there is one or more character(s) in the Enemies Available to Attack section (availableEnemies > 0) AND there are is no character in the defender section (isEnemyChosen = false)
     //the chosen character's thumbnail moves to the Defender section (under the Defender heading) 
     //update the value of  isEnemyChosen = true
-    //reduce the value of availableEnemies down to 1
+    //remove the defender from the avaialable enemies list
     //the thumbnail backgound color in the defender section is black
     //the characters not chosen stay on the 2nd section
 
@@ -49,59 +49,73 @@
   //restart the game - all variables are reset to their initial values 
   //remove the restart button from the screen
   // *** NOTE : If game is over, the only  valid event will be the click of the restart button. For everything else, do nothing
-
+  // *** The restart button will show up once the Game is Over
+  // *** The restart button will disappear when the game starts again (after clicking it)
 
 var starWars = {
-  lukeInitialHP : 120,
-  lukeCurrentHP : 120,
-  lukeinitialAP : 10,
-  lukeCurrentAP : this.lukeInitialAP,
-  lukeCounterAP : 15,
+  /*
+  lukeHP : 120,
+  //lukeCurrentHP : 120,
+  lukeAP : 10,
+  //lukeCurrentAP : this.lukeInitialAP,
+  lukeCAP : 15,
 
-  anakinInitialHP : 150,
-  anakinCurrentHP : 150,
-  anakinInitialAP : 30,
-  anakinCurrentAP : this.anakinInitialAttackPower,
-  anakinCounterAP : 25,
+  anakinHP : 150,
+  //anakinCurrentHP : 150,
+  anakinAP : 30,
+  //anakinCurrentAP : this.anakinInitialAttackPower,
+  anakinCAP : 25,
 
-  kyloInitialHP : 135,
-  kyloCurrentHP : 135,
-  kyloInitialAP : 20,
-  kyloCurrentAP : this.kyloInitialAttackPower,
-  kyloCounterAP : 20,
+  kyloHP : 135,
+  //kyloCurrentHP : 135,
+  kyloAP : 20,
+  //kyloCurrentAP : this.kyloInitialAttackPower,
+  kyloCAP : 20,
 
-  quiInitialHP : 140,
-  quiCurrentHP : 140,
-  quiInitialAP : 25,
-  quiCurrentAP: 25,
-  quiCounterAP : 25,
+  quiHP : 140,
+  //quiCurrentHP : 140,
+  quiAP : 25,
+  //quiCurrentAP: 25,
+  quiCAP : 25,
+  */
+
+  playerHP : 0,
+  playerAP : 0,
+  defenderHP : 0,
+  defenderCAP : 0,
+  
+  characters : [
+  {name : "Luke Skywalker", healthPower : 120, attackPower : 10, counterAttackPower : 15, container : "luke_container", hpClass : "luke_hp"},
+  {name : "Anakin Skywalker", healthPower : 150, attackPower : 30, counterAttackPower : 25, container : "anakin_container", hpClass : "anakin_hp"},
+  {name : "Kylo Ren", healthPower : 135, attackPower : 20, counterAttackPower : 20, container : "kylo_container", hpClass : "kylo_hp"},
+  {name : "Qui-Gon Jinn", healthPower : 140, attackPower : 25, counterAttackPower : 25, container : "qui_gon_container", hpClass : "qui_gon_hp"}
+  ],
 
   characterPicked : null,
   defenderPicked : null,
   isCharacterChosen : false ,
   areEnemiesAvailable : false,
   isEnemyChosen : false,
-  characters : [["Luke Skywalker", "luke_container"], ["Anakin Skywalker","anakin_container"], ["Kylo Ren", "kylo_container"], ["Qui-Gon Jinn", "qui_gon_container"]],
-  availableEnemies : 0, //this.characters.length - 1
+  //characters : [["Luke Skywalker", "luke_container"], ["Anakin Skywalker","anakin_container"], ["Kylo Ren", "kylo_container"], ["Qui-Gon Jinn", "qui_gon_container"]],
+  availableEnemies : [],
+  defeatedEnemies : [],
   isGameOver : false
 }
 
 $(document).ready(function() {
 
   //display the HP for each player as soon as the html document loads
-  $("#luke_hp").html(starWars.lukeCurrentHP);
-  $("#anakin_hp").html(starWars.anakinCurrentHP);
-  $("#kylo_hp").html(starWars.kyloCurrentHP);
-  $("#qui_gon_hp").html(starWars.quiCurrentHP);
-  starWars.availableEnemies = starWars.characters.length - 1;
+  $("#luke_hp").html(starWars.characters[0].healthPower);
+  $("#anakin_hp").html(starWars.characters[1].healthPower);
+  $("#kylo_hp").html(starWars.characters[2].healthPower);
+  $("#qui_gon_hp").html(starWars.characters[3].healthPower);
 
   // console.log("BEFORE :");
   // console.log("areEnemiesAvailable : " + starWars.areEnemiesAvailable);
   // console.log("isCharacterChosen : " + starWars.isCharacterChosen);
   // console.log("characterPicked : " + starWars.characterPicked);
   // console.log("defenderPicked : " + starWars.defenderPicked);
-
-  
+  //console.log("is enemy chosen : " + starWars.isEnemyChosen);
 
   $("img").on("click", function() {
     if(!starWars.areEnemiesAvailable) {
@@ -114,6 +128,7 @@ $(document).ready(function() {
       // console.log("isCharacterChosen : " + starWars.isCharacterChosen);
       // console.log("characterPicked : " + starWars.characterPicked);
       // console.log("defenderPicked : " + starWars.defenderPicked);
+      //console.log("is enemy chosen : " + starWars.isEnemyChosen);
 
       starWars.characters.forEach(function(element) {
         var source = "";
@@ -121,65 +136,116 @@ $(document).ready(function() {
         var newClass = "enemy_red"
         //console.log("I am inside the forEach");
 
-        if(starWars.characterPicked !== element[0]) {
+        //if(starWars.characterPicked !== element[0]) {
+        if(starWars.characterPicked === element.name) {
+          starWars.characterPicked = element; //assign the character as an object
+          starWars.playerHP = starWars.characterPicked.healthPower;
+        } else {
+
+        //if(starWars.characterPicked !== element.name) {  
           // console.log("I am inside the if");
           // console.log("this.alt = " + this.alt);
           // console.log("element[0] = " + element[0]);
           // console.log("element[1] = " + element[1]);
 
-          source = "." + element[1];
+          //create list of available enemies
+          starWars.availableEnemies.push(element);
+
+          //source = "." + element[1];
+          source = "." + element.container;
           $(source).addClass(newClass);
           $(source).appendTo(target);
           //console.log("source : " + source + " target : " + target);
-        
-
-        } //closing the inner if
+        } //closing the else
       }); //closing the forEach
+      //console.log("available enemies : " + starWars.availableEnemies);
     } //closing the outer if
     else if(starWars.areEnemiesAvailable && starWars.isCharacterChosen && !starWars.isEnemyChosen){
-      
+      starWars.isEnemyChosen = true;
+      //console.log("is enemy chosen : " + starWars.isEnemyChosen);
       var source;
       var target = "#defender_container";
       var newClass = "defender_black";
       
       starWars.defenderPicked = this.alt;
 
-      starWars.characters.forEach(function(element) { 
-        if(starWars.defenderPicked === element[0]) {
-          source = "." + element[1];
-        }
+      starWars.availableEnemies.forEach(function(element, index) { 
+        //if(starWars.defenderPicked === element[0]) {
+        if(starWars.defenderPicked === element.name) {
+          //source = "." + element[1];
+          starWars.defenderPicked = element; //assing the defender as an object
+          source = "." + element.container;
+          starWars.availableEnemies.splice(index,1);
+          starWars.defenderHP = starWars.defenderPicked.healthPower;
+          starWars.defenderCAP = starWars.defenderPicked.counterAttackPower;
+        } 
       });
         
       // console.log("I am in the choose defender event listener");
       // console.log("defender picked : " + starWars.defenderPicked);
       // console.log("source : " + source);
       // console.log("target : " + target);
+      console.log("availableEnemies : " + starWars.availableEnemies);
 
       $(source).addClass(newClass);
       $(source).appendTo(target);
 
-    }; //closing the img listener
-  });
+    }; // closing the else if
+  }); //closing the img listener
+
+  $("button").on("click", function() {
+    if(starWars.isGameOver) {
+      return; 
+    } else {
+      if(!starWars.isEnemyChosen) {
+        $("#message").html("<p>No enemy here!</p>");
+      } else {
+        // starWars.playerHP = starWars.characterPicked.healthPower;
+        // starWars.defenderHP = starWars.defenderPicked.healthPower;
+        // starWars.defenderCAP = starWars.defenderPicked.counterAttackPower;
+        var playerHPTarget = "#" + starWars.characterPicked.hpClass;
+        var defenderHPTarget = "#" + starWars.defenderPicked.hpClass;
+        starWars.playerAP += starWars.characterPicked.attackPower;
+        starWars.playerHP -= starWars.defenderCAP;
+        starWars.defenderHP -= starWars.playerAP;
+
+        $(playerHPTarget).html(starWars.playerHP);
+        $(defenderHPTarget).html(starWars.defenderHP);
+
+        console.log(playerHPTarget);
+        console.log(defenderHPTarget);
+
+        $("#message").html("<p>You attacked...</p>");
+      }
+    }
+  }); //closing the button listener 
 
   $("#restart").on("click", function() {
+    starWars.characterPicked = null;
+    starWars.defenderPicked = null;
     starWars.isCharacterChosen = false;
-    starWars.characterPicked = "";
-    starWars.isEnemyChosen = false;
-    starWars.availableEnemies = this.characters.length - 1;
     starWars.areEnemiesAvailable = false;
-    starWars.isGameOver = true;
+    starWars.isEnemyChosen = false;
+    starWars.availableEnemies = [];
+    starWars.defeatedEnemies = [];
+    starWars.isGameOver = false;
+    starWars.playerHP = 0;
+    starWars.playerAP = 0;
+    starWars.defenderHP = 0;
+    starWars.defenderCAP = 0;
+
     
-    starWars.lukeCurrentHP = starWars.lukeInitialHP;
-    starWars.lukeCurrentAP = starWars.lukeInitialAP;
+    // starWars.lukeCurrentHP = starWars.lukeInitialHP;
+    // starWars.lukeCurrentAP = starWars.lukeInitialAP;
 
-    starWars.anakinCurrentHP = starWars.anakinInitialHP;
-    starWars.anakinCurrentAP = starWars.anakinInitialAP;
+    // starWars.anakinCurrentHP = starWars.anakinInitialHP;
+    // starWars.anakinCurrentAP = starWars.anakinInitialAP;
 
-    starWars.kyloCurrentHP = starWars.kyloInitialHP;
-    starWars.kyloCurrentAP = starWars.kyloInitialAP;
+    // starWars.kyloCurrentHP = starWars.kyloInitialHP;
+    // starWars.kyloCurrentAP = starWars.kyloInitialAP;
 
-    starWars.quiCurrentHP = starWars.quiInitialHP;
-    starWars.quiCurrentAP = starWars.quiInitialAP;
+    // starWars.quiCurrentHP = starWars.quiInitialHP;
+    // starWars.quiCurrentAP = starWars.quiInitialAP;
 
   });  
 

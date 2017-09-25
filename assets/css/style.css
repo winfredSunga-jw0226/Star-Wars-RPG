@@ -42,6 +42,12 @@ p {
   text-align: center;
   font-size : 10px;
 }
+
+#message p {
+  text-align : left;
+  font-size : 14px;
+}
+
 #your_character, #enemies {
   width : 605px;
   height : 140px;
