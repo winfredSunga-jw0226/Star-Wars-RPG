@@ -48,28 +48,42 @@
 //Listen for a click event on the restart button
   //restart the game - all variables are reset to their initial values 
   //remove the restart button from the screen
+  // *** NOTE : If game is over, the only  valid event will be the click of the restart button. For everything else, do nothing
+
 
 var starWars = {
   lukeInitialHP : 120,
   lukeCurrentHP : 120,
-  lukeAP : 10,
-  lukeCAP : 15,
+  lukeinitialAP : 10,
+  lukeCurrentAP : this.lukeInitialAP,
+  lukeCounterAP : 15,
+
   anakinInitialHP : 150,
   anakinCurrentHP : 150,
-  anakinAP : 30,
-  anakinCAP : 25,
+  anakinInitialAP : 30,
+  anakinCurrentAP : this.anakinInitialAttackPower,
+  anakinCounterAP : 25,
+
   kyloInitialHP : 135,
   kyloCurrentHP : 135,
-  kyloAP : 20,
-  kyloCAP : 20,
+  kyloInitialAP : 20,
+  kyloCurrentAP : this.kyloInitialAttackPower,
+  kyloCounterAP : 20,
+
   quiInitialHP : 140,
   quiCurrentHP : 140,
-  quilAP : 25,
-  quiCAP : 25,
+  quiInitialAP : 25,
+  quiCurrentAP: 25,
+  quiCounterAP : 25,
+
+  characterPicked : null,
+  defenderPicked : null,
   isCharacterChosen : false ,
+  areEnemiesAvailable : false,
   isEnemyChosen : false,
-  characters : ["Luke Skywalker", "Anakin Skywalker", "Kylo Ren", "Qui-Gon Jinn"],
-  availableEnemies : 3 //this.characters.length - 1
+  characters : [["Luke Skywalker", "luke_container"], ["Anakin Skywalker","anakin_container"], ["Kylo Ren", "kylo_container"], ["Qui-Gon Jinn", "qui_gon_container"]],
+  availableEnemies : 0, //this.characters.length - 1
+  isGameOver : false
 }
 
 $(document).ready(function() {
@@ -79,6 +93,104 @@ $(document).ready(function() {
   $("#anakin_hp").html(starWars.anakinCurrentHP);
   $("#kylo_hp").html(starWars.kyloCurrentHP);
   $("#qui_gon_hp").html(starWars.quiCurrentHP);
+  starWars.availableEnemies = starWars.characters.length - 1;
+
+  // console.log("BEFORE :");
+  // console.log("areEnemiesAvailable : " + starWars.areEnemiesAvailable);
+  // console.log("isCharacterChosen : " + starWars.isCharacterChosen);
+  // console.log("characterPicked : " + starWars.characterPicked);
+  // console.log("defenderPicked : " + starWars.defenderPicked);
+
+  
+
+  $("img").on("click", function() {
+    if(!starWars.areEnemiesAvailable) {
+      starWars.isCharacterChosen = true;
+      starWars.characterPicked = this.alt;
+      starWars.areEnemiesAvailable = true;
+      $("#your_character_text").prependTo("#your_character");
+      // console.log("AFTER :");
+      // console.log("areEnemiesAvailable : " + starWars.areEnemiesAvailable);
+      // console.log("isCharacterChosen : " + starWars.isCharacterChosen);
+      // console.log("characterPicked : " + starWars.characterPicked);
+      // console.log("defenderPicked : " + starWars.defenderPicked);
+
+      starWars.characters.forEach(function(element) {
+        var source = "";
+        var target = "#enemies";
+        var newClass = "enemy_red"
+        //console.log("I am inside the forEach");
+
+        if(starWars.characterPicked !== element[0]) {
+          // console.log("I am inside the if");
+          // console.log("this.alt = " + this.alt);
+          // console.log("element[0] = " + element[0]);
+          // console.log("element[1] = " + element[1]);
+
+          source = "." + element[1];
+          $(source).addClass(newClass);
+          $(source).appendTo(target);
+          //console.log("source : " + source + " target : " + target);
+        
+
+        } //closing the inner if
+      }); //closing the forEach
+    } //closing the outer if
+    else if(starWars.areEnemiesAvailable && starWars.isCharacterChosen && !starWars.isEnemyChosen){
+      
+      var source;
+      var target = "#defender_container";
+      var newClass = "defender_black";
+      
+      starWars.defenderPicked = this.alt;
+
+      starWars.characters.forEach(function(element) { 
+        if(starWars.defenderPicked === element[0]) {
+          source = "." + element[1];
+        }
+      });
+        
+      // console.log("I am in the choose defender event listener");
+      // console.log("defender picked : " + starWars.defenderPicked);
+      // console.log("source : " + source);
+      // console.log("target : " + target);
+
+      $(source).addClass(newClass);
+      $(source).appendTo(target);
+
+    }; //closing the img listener
+  });
+
+  $("#restart").on("click", function() {
+    starWars.isCharacterChosen = false;
+    starWars.characterPicked = "";
+    starWars.isEnemyChosen = false;
+    starWars.availableEnemies = this.characters.length - 1;
+    starWars.areEnemiesAvailable = false;
+    starWars.isGameOver = true;
+    
+    starWars.lukeCurrentHP = starWars.lukeInitialHP;
+    starWars.lukeCurrentAP = starWars.lukeInitialAP;
+
+    starWars.anakinCurrentHP = starWars.anakinInitialHP;
+    starWars.anakinCurrentAP = starWars.anakinInitialAP;
+
+    starWars.kyloCurrentHP = starWars.kyloInitialHP;
+    starWars.kyloCurrentAP = starWars.kyloInitialAP;
+
+    starWars.quiCurrentHP = starWars.quiInitialHP;
+    starWars.quiCurrentAP = starWars.quiInitialAP;
+
+  });  
+
+    
+
+    // if(!isCharacterChosen) {
+    //  if() {
+
+    //  }
+    // }  
+ 
 
 });
 

@@ -16,14 +16,14 @@ body {
 }
 
 .container {
-  margin-left : 5px;
+  margin-left : 40px;
 }
 
 h1, h3, p {
   font-family : 'Michroma', sans-serif;
   white-space : nowrap; 
   font-weight : bold;
-  
+
 }
 
 h1 {
@@ -72,8 +72,26 @@ p {
   width : 150px;
   float : left;
   margin : 0px;
-  border : 2px solid blue;
+  border : 2px solid #2d9de7;
   background-color: #ffffff
+}
+
+.enemy_red {
+  background-color : #e41132;
+  border : 2px solid #1f2024;
+}
+
+.enemy_red p {
+  color : #ffffff;
+}
+
+.defender_black {
+  background-color : #1f2024;
+  border : 2px solid #2d9de7;
+}
+
+.defender_black p {
+  color : #ffffff;
 }
 
 #defender {
