@@ -71,20 +71,27 @@ var starWars = {
   availableEnemies : [],
   defeatedEnemies : [],
   isGameOver : false,
-  resetVariables : function() {
-    starWars.characterPicked = null;
-    starWars.defenderPicked = null;
-    starWars.isCharacterChosen = false;
-    starWars.areEnemiesAvailable = false;
-    starWars.isEnemyChosen = false;
-    starWars.availableEnemies = [];
-    starWars.defeatedEnemies = [];
-    starWars.isGameOver = false;
-    starWars.playerHP = 0;
-    starWars.playerAP = 0;
-    starWars.defenderHP = 0;
-    starWars.defenderCAP = 0;
+  playSaberClash : function() {
+     var saberClash = new Audio("assets/audio/saber-clash.mp3");
+     saberClash.play();
+  },
+  playVaderBreathe : function() {
+    var vaderBreathe = new Audio("assets/audio/vader-breathe.mp3");
+    vaderBreathe.play();
+  },
+  playDUTF : function() {
+    var dontUTF = new Audio("assets/audio/dont-underestimate.wav");
+    dontUTF.play();
+  },
+  playpointless : function() {
+    var pointless = new Audio("assets/audio/pointless.wav");
+    pointless.play();
+  },
+  playDestroyYou : function() {
+    var destroyYou = new Audio("assets/audio/destroy-you.wav");
+    destroyYou.play();
   }
+
 }
 
 $(document).ready(function() {
@@ -127,6 +134,8 @@ $(document).ready(function() {
       var source;
       var target = "#defender_container";
       var newClass = "defender_black";
+
+      starWars.playDestroyYou();
 
       starWars.isEnemyChosen = true;
       starWars.defenderPicked = this.alt;
@@ -178,21 +187,32 @@ $(document).ready(function() {
           if(starWars.playerHP <= 0) {
             starWars.isGameOver = true;
 
+            starWars.playSaberClash();
+            setTimeout(starWars.playVaderBreathe, 1000);
+
             $("#message").html("<br><p>You have been defeated. GAME OVER!!!</p><br>");
             $("#message").append("<a class='btn btn-primary' href='index.html' role='button'>Reset</a>");
           } else if(starWars.playerHP > 0 && starWars.defenderHP <=0 && starWars.areEnemiesAvailable && starWars.isEnemyChosen) {
-            $("#message").html("<br><p>You have defeated " + starWars.defenderPicked.name + ".</p>");
-            $("#message").append("<p>You can choose to fight another enemy.</p>");
             starWars.isEnemyChosen = false;
             $(".defender_black").remove();
+            
+            starWars.playSaberClash();
+            setTimeout(starWars.playpointless, 1000);
+
+            $("#message").html("<br><p>You have defeated " + starWars.defenderPicked.name + ".</p>");
+            $("#message").append("<p>You can choose to fight another enemy.</p>");
           } else if(starWars.playerHP > 0 && starWars.defenderHP <=0 && !starWars.areEnemiesAvailable) {
-            $("#message").html("<br><p>GAME OVER. You have defeated all your enemies!!!</p><br>");
             starWars.isGameOver = true;
+
+            starWars.playSaberClash();
+            setTimeout(starWars.playDUTF, 1000);
+
+            $("#message").html("<br><p>GAME OVER. You have defeated all your enemies!!!</p><br>");
             $("#message").append("<a class='btn btn-primary' href='index.html' role='button'>Reset</a>");
           } // else if both players still have HP > 0
            else {
-            var saberClash = new Audio("assets/audio/saber-clash.mp3");
-            saberClash.play();
+            starWars.playSaberClash();
+
             $("#message").html("<br><p>You attacked " + starWars.defenderPicked.name + " for " + starWars.playerAP + " damage. </p>");
             $("#message").append("<p>" + starWars.defenderPicked.name + " attacked you back for " + starWars.defenderCAP + " damage. </p>");
           }
