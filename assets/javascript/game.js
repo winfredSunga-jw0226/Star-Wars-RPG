@@ -58,10 +58,10 @@ var starWars = {
   defenderHP : 0,
   defenderCAP : 0,
   characters : [
-  {name : "Luke Skywalker", healthPower : 130, attackPower : 20, counterAttackPower : 15, container : "luke_container", hpClass : "luke_hp"},
-  {name : "Anakin Skywalker", healthPower : 145, attackPower : 30, counterAttackPower : 20, container : "anakin_container", hpClass : "anakin_hp"},
-  {name : "Kylo Ren", healthPower : 120, attackPower : 20, counterAttackPower : 15, container : "kylo_container", hpClass : "kylo_hp"},
-  {name : "Qui-Gon Jinn", healthPower : 130, attackPower : 25, counterAttackPower : 20, container : "qui_gon_container", hpClass : "qui_gon_hp"}
+  {name : "Luke Skywalker", healthPower : 135, attackPower : 15, counterAttackPower : 15, container : "luke_container", hpClass : "luke_hp"},
+  {name : "Anakin Skywalker", healthPower : 180, attackPower : 25, counterAttackPower : 25, container : "anakin_container", hpClass : "anakin_hp"},
+  {name : "Kylo Ren", healthPower : 120, attackPower : 15, counterAttackPower : 10, container : "kylo_container", hpClass : "kylo_hp"},
+  {name : "Qui-Gon Jinn", healthPower : 150, attackPower : 20, counterAttackPower : 20, container : "qui_gon_container", hpClass : "qui_gon_hp"}
   ],
   characterPicked : null,
   defenderPicked : null,
@@ -197,9 +197,6 @@ $(document).ready(function() {
         } //closing the inner if-else
       } //closing the outer if-else
     }  
-    // } else if(buttonClicked === "reset"){
-    //   starWars.resetVariables();
-    // }
   }); //closing the button listener 
 
 });
