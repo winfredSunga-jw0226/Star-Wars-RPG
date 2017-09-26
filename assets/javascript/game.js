@@ -191,6 +191,8 @@ $(document).ready(function() {
             $("#message").append("<a class='btn btn-primary' href='index.html' role='button'>Reset</a>");
           } // else if both players still have HP > 0
            else {
+            var saberClash = new Audio("assets/audio/saber-clash.mp3");
+            saberClash.play();
             $("#message").html("<br><p>You attacked " + starWars.defenderPicked.name + " for " + starWars.playerAP + " damage. </p>");
             $("#message").append("<p>" + starWars.defenderPicked.name + " attacked you back for " + starWars.defenderCAP + " damage. </p>");
           }
