@@ -1,4 +1,4 @@
-# Star Wars RPG Game
+# Star Wars RPG
 This is a Star Wars themed RGP game. A player selects a character as his/her fighter. The goal is to defeat all the enemies while keeping his/her HP (health points) above 0.
 
 ### Instructions
