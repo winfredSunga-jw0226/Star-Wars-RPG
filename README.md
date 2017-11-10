@@ -16,7 +16,7 @@ This is a Star Wars themed RGP game. A player selects a character as his/her fig
 
 ### Demo
 
-
+![Star Wars RPG Demo](assets/images/game_demo.mp4)
 
 ### Play the Game 
 
